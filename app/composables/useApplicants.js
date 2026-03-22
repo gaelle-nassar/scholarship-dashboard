@@ -8,7 +8,11 @@ export function computeTotalScore(a) {
   return (gpa + essay + financial + extra).toFixed(2)
 }
 
+const STATUS_RANK = { accepted: 3, waitlisted: 2, rejected: 1, null: 0 }
+
 export function useApplicants(query, gpaRange, sortKey, sortDir) {
+  const { getStatus } = useStatus()
+
   const sortedApplicants = computed(() => {
     const q = query?.value?.toLowerCase() ?? ''
     const min = parseFloat(gpaRange?.value?.min) || 0
@@ -18,6 +22,7 @@ export function useApplicants(query, gpaRange, sortKey, sortDir) {
 
     const getValue = (a) => {
       if (key === 'totalScore') return parseFloat(computeTotalScore(a))
+      if (key === 'status') return STATUS_RANK[getStatus(a.id) ?? 'null'] ?? 0
       return a[key]
     }
 
