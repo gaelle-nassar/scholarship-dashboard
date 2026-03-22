@@ -13,12 +13,11 @@
         <div v-for="row in breakdown" :key="row.label" class="flex items-start gap-4 px-5 py-4">
           <span class="w-2.5 h-2.5 rounded-full mt-1 shrink-0" :class="row.dot"></span>
           <div class="flex-1">
-            <div class="flex justify-between">
-              <span class="font-medium text-gray-700">{{ row.label }}</span>
-              <span class="text-gray-400 text-xs">{{ row.weight }} of total</span>
-            </div>
+            <span class="font-medium text-gray-700">{{ row.label }}</span>
+            <span class="text-gray-400 text-xs block sm:hidden">{{ row.weight }} of total</span>
             <p class="text-gray-400 text-xs mt-0.5">{{ row.formula }}</p>
           </div>
+          <span class="text-gray-400 text-xs hidden sm:inline shrink-0">{{ row.weight }} of total</span>
           <span class="text-gray-700 font-semibold shrink-0">{{ row.contribution }}</span>
         </div>
       </div>
