@@ -44,6 +44,7 @@ const columns = [
   { key: 'financialNeed',   label: 'Financial Need',  center: true  },
   { key: 'extracurricular', label: 'Extracurricular', center: true  },
   { key: 'totalScore',      label: 'Total Score',     center: true  },
+  { key: 'status',          label: 'Status',          center: true  },
 ]
 
 const query    = ref('')

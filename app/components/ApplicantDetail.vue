@@ -2,13 +2,17 @@
   <div class="bg-white rounded-2xl shadow p-8">
     <div class="flex gap-10">
 
-      <!-- Left: name + total score -->
+      <!-- Left: name + total score + status -->
       <div class="flex flex-col justify-center min-w-40">
         <p class="text-gray-400 text-sm mb-1">Applicant #{{ applicant.id }}</p>
         <h1 class="text-2xl font-bold text-gray-800">{{ applicant.name }}</h1>
         <div class="mt-4">
           <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Total Score</p>
           <span class="text-4xl font-bold text-indigo-600">{{ total }}</span>
+        </div>
+        <div class="mt-5">
+          <p class="text-xs text-gray-400 uppercase tracking-wide mb-2">Decision</p>
+          <StatusCell :applicantId="applicant.id" />
         </div>
       </div>
 

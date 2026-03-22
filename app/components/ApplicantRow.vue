@@ -11,6 +11,9 @@
         {{ computeTotalScore(applicant) }}
       </span>
     </td>
+    <td class="px-6 py-4 text-center">
+      <StatusCell :applicantId="applicant.id" />
+    </td>
   </tr>
 </template>
 
@@ -20,4 +23,5 @@ import { computeTotalScore } from '~/composables/useApplicants.js'
 defineProps({
   applicant: { type: Object, required: true }
 })
+
 </script>
