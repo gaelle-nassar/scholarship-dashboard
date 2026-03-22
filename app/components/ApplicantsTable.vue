@@ -1,6 +1,9 @@
 <template>
   <div class="space-y-4">
-  <SearchBar v-model="query" />
+  <div class="flex items-center gap-3">
+    <SearchBar v-model="query" />
+    <GpaFilter v-model="minGpa" />
+  </div>
   <div class="bg-white rounded-2xl shadow overflow-hidden">
     <table class="w-full text-sm text-left">
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
@@ -28,5 +31,6 @@
 
 <script setup>
 const query = ref('')
-const { sortedApplicants } = useApplicants(query)
+const minGpa = ref('')
+const { sortedApplicants } = useApplicants(query, minGpa)
 </script>
