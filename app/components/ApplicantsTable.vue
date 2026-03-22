@@ -1,12 +1,13 @@
 <template>
   <div class="space-y-4">
-    <div class="flex items-center gap-3">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
       <SearchBar v-model="query" />
       <GpaFilter v-model="gpaRange" />
     </div>
 
     <div class="bg-white rounded-2xl shadow overflow-hidden">
-      <table class="w-full text-sm text-left">
+      <div class="overflow-x-auto">
+      <table class="w-full text-sm text-left min-w-[700px]">
         <thead class="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
           <tr>
             <th class="px-6 py-4">#</th>
@@ -32,6 +33,7 @@
           />
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </template>
