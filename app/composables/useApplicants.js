@@ -8,13 +8,27 @@ export function computeTotalScore(a) {
   return (gpa + essay + financial + extra).toFixed(2)
 }
 
-export function useApplicants(query, minGpa) {
+export function useApplicants(query, minGpa, sortKey, sortDir) {
   const sortedApplicants = computed(() => {
     const q = query?.value?.toLowerCase() ?? ''
     const gpa = parseFloat(minGpa?.value) || 0
+    const key = sortKey?.value ?? 'totalScore'
+    const dir = sortDir?.value ?? 'desc'
+
+    const getValue = (a) => {
+      if (key === 'totalScore') return parseFloat(computeTotalScore(a))
+      return a[key]
+    }
+
     return [...applicants]
       .filter(a => a.name.toLowerCase().includes(q) && a.gpa >= gpa)
-      .sort((a, b) => computeTotalScore(b) - computeTotalScore(a))
+      .sort((a, b) => {
+        const valA = getValue(a)
+        const valB = getValue(b)
+        if (valA < valB) return dir === 'asc' ? -1 : 1
+        if (valA > valB) return dir === 'asc' ? 1 : -1
+        return 0
+      })
   })
 
   return { sortedApplicants }
