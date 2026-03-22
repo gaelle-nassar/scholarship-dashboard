@@ -17,4 +17,4 @@ Claude Code made it significantly easier to set up and build this project. Since
 - Add a backend/database so applicant data and statuses persist across sessions rather than using localStorage
 - Add export to CSV so the committee can download the filtered applicant list
 - Improve mobile responsiveness on the detail page
-- Add unit tests for the scoring algorithm
+- Add authentication and role-based access so only authorized committee members can change applicant statuses
