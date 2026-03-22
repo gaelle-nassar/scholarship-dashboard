@@ -19,7 +19,7 @@
           </thead>
           <tbody class="divide-y divide-gray-100">
             <tr
-              v-for="applicant in applicants"
+              v-for="applicant in sortedApplicants"
               :key="applicant.id"
               class="hover:bg-gray-50 transition-colors"
             >
@@ -30,8 +30,8 @@
               <td class="px-6 py-4 text-center text-gray-700">{{ applicant.financialNeed }}</td>
               <td class="px-6 py-4 text-center text-gray-700">{{ applicant.extracurricular }}</td>
               <td class="px-6 py-4 text-center">
-                <span class="inline-block bg-gray-100 text-gray-400 text-xs font-semibold px-3 py-1 rounded-full">
-                  TBD
+                <span class="inline-block bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 rounded-full">
+                  {{ totalScore(applicant) }}
                 </span>
               </td>
             </tr>
@@ -44,4 +44,16 @@
 
 <script setup>
 import { applicants } from '~/data/applicants.js'
+
+function totalScore(a) {
+  const gpa = (a.gpa / 4.0) * 100 * 0.30
+  const essay = a.essayScore * 0.25
+  const financial = a.financialNeed * 0.25
+  const extra = a.extracurricular * 0.20
+  return (gpa + essay + financial + extra).toFixed(2)
+}
+
+const sortedApplicants = computed(() =>
+  [...applicants].sort((a, b) => totalScore(b) - totalScore(a))
+)
 </script>
