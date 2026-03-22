@@ -8,10 +8,11 @@ export function computeTotalScore(a) {
   return (gpa + essay + financial + extra).toFixed(2)
 }
 
-export function useApplicants(query, minGpa, sortKey, sortDir) {
+export function useApplicants(query, gpaRange, sortKey, sortDir) {
   const sortedApplicants = computed(() => {
     const q = query?.value?.toLowerCase() ?? ''
-    const gpa = parseFloat(minGpa?.value) || 0
+    const min = parseFloat(gpaRange?.value?.min) || 0
+    const max = parseFloat(gpaRange?.value?.max) || 4.0
     const key = sortKey?.value ?? 'totalScore'
     const dir = sortDir?.value ?? 'desc'
 
@@ -21,7 +22,7 @@ export function useApplicants(query, minGpa, sortKey, sortDir) {
     }
 
     return [...applicants]
-      .filter(a => a.name.toLowerCase().includes(q) && a.gpa >= gpa)
+      .filter(a => a.name.toLowerCase().includes(q) && a.gpa >= min && a.gpa <= max)
       .sort((a, b) => {
         const valA = getValue(a)
         const valB = getValue(b)

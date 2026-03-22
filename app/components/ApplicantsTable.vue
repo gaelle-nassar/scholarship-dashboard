@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <div class="flex items-center gap-3">
       <SearchBar v-model="query" />
-      <GpaFilter v-model="minGpa" />
+      <GpaFilter v-model="gpaRange" />
     </div>
 
     <div class="bg-white rounded-2xl shadow overflow-hidden">
@@ -46,10 +46,10 @@ const columns = [
   { key: 'totalScore',      label: 'Total Score',     center: true  },
 ]
 
-const query   = ref('')
-const minGpa  = ref('')
-const sortKey = ref('totalScore')
-const sortDir = ref('desc')
+const query    = ref('')
+const gpaRange = ref({ min: '', max: '' })
+const sortKey  = ref('totalScore')
+const sortDir  = ref('desc')
 
 function setSort(key) {
   if (sortKey.value === key) {
@@ -60,5 +60,5 @@ function setSort(key) {
   }
 }
 
-const { sortedApplicants } = useApplicants(query, minGpa, sortKey, sortDir)
+const { sortedApplicants } = useApplicants(query, gpaRange, sortKey, sortDir)
 </script>
