@@ -1,4 +1,6 @@
 <template>
+  <div class="space-y-4">
+  <SearchBar v-model="query" />
   <div class="bg-white rounded-2xl shadow overflow-hidden">
     <table class="w-full text-sm text-left">
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs tracking-wider">
@@ -21,10 +23,10 @@
       </tbody>
     </table>
   </div>
+  </div>
 </template>
 
 <script setup>
-import { useApplicants } from '~/composables/useApplicants.js'
-
-const { sortedApplicants } = useApplicants()
+const query = ref('')
+const { sortedApplicants } = useApplicants(query)
 </script>

@@ -8,10 +8,13 @@ export function computeTotalScore(a) {
   return (gpa + essay + financial + extra).toFixed(2)
 }
 
-export function useApplicants() {
-  const sortedApplicants = computed(() =>
-    [...applicants].sort((a, b) => computeTotalScore(b) - computeTotalScore(a))
-  )
+export function useApplicants(query) {
+  const sortedApplicants = computed(() => {
+    const q = query?.value?.toLowerCase() ?? ''
+    return [...applicants]
+      .filter(a => a.name.toLowerCase().includes(q))
+      .sort((a, b) => computeTotalScore(b) - computeTotalScore(a))
+  })
 
   return { sortedApplicants }
 }
